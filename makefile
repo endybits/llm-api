@@ -1,6 +1,7 @@
 install:
 	python -m pip install -U pip && \
-	pip install -r requirements.txt
+	pip install -r requirements.txt \
+	pwd \
 	export PYTHONPATH=.
 lint:
 	pylint --disable=R,C api
