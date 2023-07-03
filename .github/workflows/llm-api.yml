@@ -1,0 +1,23 @@
+name: Deployment llm-api pipeline
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          make install      
+      - name: Linter
+        run: ls -al
+      - name: Tests
+        run: |
+          make tests
+      - name: Format
+        run: |
+          format
