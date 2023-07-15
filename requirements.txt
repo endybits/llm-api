@@ -3,3 +3,6 @@ pytest==7.4.0
 pytest-cov==4.1.0
 black==23.3.0
 llama-index==0.6.38.post1
+fastapi==0.100.0
+uvicorn==0.22.0
+Jinja2==3.1.2

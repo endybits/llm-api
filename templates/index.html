@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot API</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="bot-box">
+        <div class="bot-box-header">
+            <h4>Ask me a question</h4>
+            <p><i class="fa fa-times"></i></p>
+
+        </div>
+        <div id="bot-box-body" class="bot-box-body">
+        </div>
+        <div id="userInput" class="bot-box-footer">
+            <input id="test_req" type="text" placeholder="Enter your message here...">
+            <!--<i class="send far fa-paper-plane"></i> -->
+            <input id="send" type="submit" value="Send">
+        </div>
+        
+    </div>
+    <script>
+        $(document).ready(function() {
+            console.log("In function");
+            function getBotResponse() {
+                console.log("Enter");
+                var raw_text = $('#test_req').val();
+                var box_footer = document.getElementById('userInput');
+                var user_html_text = '<div class="bot-box-body-send"><p>' + raw_text + '</p></div>';
+                console.log("input text: " + raw_text);
+                console.log("Box footer chat: " + box_footer);
+                $('#test_req').val("");                        
+                $('#bot-box-body').append(user_html_text);
+                box_footer.scrollIntoView({block: 'start', behavior: 'smooth'});
+                console.log("After read #bot-box-footer");
+                $.get("/chatting", {'message': raw_text}).done(function(data){
+                    var bot_html_text = '<div class="bot-box-body-resp"><p>' + data + '</p></div>';
+                    console.log("response text: " + data);
+                    $('#bot-box-body').append(bot_html_text);
+                    box_footer.scrollIntoView({block: 'start', behavior: 'smooth'});
+                });
+            }
+            $('#test_req').keypress(function(e) {
+                    if (e.which == 13) {
+                        getBotResponse();
+                    }
+                });
+
+                $('#send').click(function() {
+                    getBotResponse();
+                });
+        })
+    </script>
+    
+</body>
+</html>
