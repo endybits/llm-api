@@ -2,12 +2,14 @@ import os
 
 # import logging as log
 
-from api.core.config import get_config_values
+# from api.core.config import get_config_values
 
 
-config = get_config_values()
-OPENAI_API_KEY = config["openai_api_key"]
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+# config = get_config_values()
+# OPENAI_API_KEY = config["openai_api_key"]
+# os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+
+os.getenv("OPENAI_API_KEY")
 
 from langchain import OpenAI
 from llama_index import (

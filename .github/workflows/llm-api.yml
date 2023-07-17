@@ -12,7 +12,11 @@ jobs:
           fetch-depth: 0
       - name: Install dependencies
         run: |
-          make install      
+          make install
+      - name: envs
+        run: |
+          export OPENAI_API_KEY="${{ vars.OPENAI_API_KEY }}"
+          echo $OPENAI_API_KEY
       - name: Linter
         run: ls -al
       - name: Tests
